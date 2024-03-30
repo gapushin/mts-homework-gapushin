@@ -1,8 +1,8 @@
 package animal;
 
 public class Wolf extends Predator {
-    public Wolf (String _breed, String _name, String _character, Double _cost) {
-        super(_breed, _name, _character, _cost);
+    public Wolf (String breed, String name, String character, Double cost) {
+        super(breed, name, character, cost);
     }
 
     @Override

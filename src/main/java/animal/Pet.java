@@ -1,13 +1,13 @@
 package animal;
 
 public class Pet extends AbstractAnimal {
-    public Pet(String _breed, String _name, String _character, Double _cost) {
-        super(_breed, _name, _character, _cost);
+    public Pet(String breed, String name, String character, Double cost) {
+        super(breed, name, character, cost);
     }
 
     @Override
     public void printAnimalData () {
-        System.out.println("Порода: " + this.getBreed() + " Характер: " + this.getCharacter() + " Имя: "+ this.getName() + " Цена: " + this.getCost()+ " А еще я домашний <3");
+        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost()+ " А еще я домашний <3");
     }
 
     public void makePetSound () {

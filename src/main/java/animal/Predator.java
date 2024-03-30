@@ -1,13 +1,13 @@
 package animal;
 
 public class Predator extends AbstractAnimal {
-    public Predator(String _breed, String _name, String _character, Double _cost) {
-        super(_breed, _name, _character, _cost);
+    public Predator(String breed, String name, String character, Double cost) {
+        super(breed, name, character, cost);
     }
     
     @Override
     public void printAnimalData () {
-        System.out.println("Порода: " + this.getBreed() + " Характер: " + this.getCharacter() + " Имя: "+ this.getName() + " Цена: " + this.getCost()+ " Я злой и опасный!");
+        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost()+ " Я злой и опасный!");
     }
 
     public void makeRoar () {

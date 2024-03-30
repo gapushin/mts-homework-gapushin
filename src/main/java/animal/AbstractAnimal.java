@@ -6,34 +6,34 @@ abstract class AbstractAnimal implements IAnimal {
     protected Double cost;
     protected String character;
 
-    protected AbstractAnimal (String _breed, String _name, String _character, Double _cost) {
-        this.breed = _breed;
-        this.name = _name;
-        this.character = _character;
-        this.cost = _cost;
+    protected AbstractAnimal (String breed, String name, String character, Double cost) {
+        this.breed = breed;
+        this.name = name;
+        this.character = character;
+        this.cost = cost;
     }
 
     @Override
     public Double getCost() {
-        return this.cost;
+        return cost;
     }
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     @Override
     public String getCharacter() {
-        return this.character;
+        return character;
     }
 
     @Override
     public String getBreed() {
-        return this.breed;
+        return breed;
     }
 
     public void printAnimalData () {
-        System.out.println("Порода: " + this.getBreed() + " Характер: " + this.getCharacter() + " Имя: "+ this.getName() + " Цена: " + this.getCost());
+        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost());
     }
 }

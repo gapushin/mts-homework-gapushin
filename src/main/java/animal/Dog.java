@@ -1,8 +1,8 @@
 package animal;
 
 public class Dog extends Pet {
-    public Dog(String _breed, String _name, String _character, Double _cost) {
-        super(_breed, _name, _character, _cost);
+    public Dog(String breed, String name, String character, Double cost) {
+        super(breed, name, character, cost);
     }
 
     @Override

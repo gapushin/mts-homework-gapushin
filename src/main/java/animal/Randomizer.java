@@ -12,21 +12,21 @@ public class Randomizer implements IRandomizer {
 
     @Override
     public String getRandomBreed() {
-        return this.breedValues[this.getRandomIndex(this.breedValues.length)];
+        return breedValues[getRandomIndex(breedValues.length)];
     }
 
     @Override
     public Double getRandomCoast() {
-        return this.costValues[this.getRandomIndex(this.costValues.length)];
+        return costValues[getRandomIndex(costValues.length)];
     }
 
     @Override
     public String getRandomName() {
-        return this.nameValues[this.getRandomIndex(this.nameValues.length)];
+        return nameValues[getRandomIndex(nameValues.length)];
     }
 
     @Override
     public String getRandomCharacter() {
-        return this.characterValues[this.getRandomIndex(this.characterValues.length)];
+        return characterValues[getRandomIndex(characterValues.length)];
     }
 }
