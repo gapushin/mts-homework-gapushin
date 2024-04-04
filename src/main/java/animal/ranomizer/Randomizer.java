@@ -1,4 +1,8 @@
-package animal;
+package animal.ranomizer;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 public class Randomizer implements IRandomizer {
     final String[] breedValues = {"Порода 1", "Порода 2", "Порода 3", "Порода 4", "Порода 5"};
@@ -28,5 +32,19 @@ public class Randomizer implements IRandomizer {
     @Override
     public String getRandomCharacter() {
         return characterValues[getRandomIndex(characterValues.length)];
+    }
+
+    @Override
+    public LocalDate getRandomBirthDate() {
+        Random random = new Random();
+        int year = 1970 + random.nextInt(55);
+        int month = random.nextInt(11) + 1;
+        int day = random.nextInt(27) + 1;
+
+        LocalDate localDate = LocalDate.of(year, month, day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String localDateString = localDate.format(formatter);
+
+        return LocalDate.parse(localDateString, formatter);
     }
 }
