@@ -3,7 +3,7 @@ package animal;
 public class CreateAnimalServiceImpl implements IAnimalService {
     public void createAnimals(int length) {
         for (int i = 0; i < length; i++) {
-            this.createRandomAnimal();
+            createRandomAnimal();
             i++;
         }
     }
@@ -13,7 +13,7 @@ public class CreateAnimalServiceImpl implements IAnimalService {
         int count = 0;
 
         do {
-            this.createRandomAnimal();
+            createRandomAnimal();
             count++;
         } while (count < 10);
     }
