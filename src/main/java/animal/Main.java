@@ -1,45 +1,38 @@
 package animal;
 
-import animal.exceptions.InvalidAnimalBirthDateException;
-import animal.exceptions.InvalidAnimalException;
+import animal.repository.AnimalsRepositoryImpl;
 import animal.search.SearchService;
 import animal.search.SearchServiceImpl;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        CreateAnimalService createAnimalService = new CreateAnimalService();
-        CreateAnimalServiceImpl createAnimalServiceImp = new CreateAnimalServiceImpl();
-
-        createAnimalService.createAnimals();
-        System.out.println("— — — — — — — — — —");
-
-        createAnimalServiceImp.createAnimals();
-        System.out.println("— — — — — — — — — —");
-
-        createAnimalServiceImp.createAnimals(5);
-
-        Cat cat1 = new Cat("Мэйнкун", "Барсик", "Задумчивый", 10.0, LocalDate.now());
-        Cat cat2 = new Cat("Мэйнкун", "Мусик", "Задумчивый", 1000.0,null);
+        CreateAnimalServiceImpl createAnimalService = new CreateAnimalServiceImpl();
         SearchService searchService = new SearchServiceImpl();
+        AnimalsRepositoryImpl animalsRepository = new AnimalsRepositoryImpl(searchService);
 
-        try {
-            searchService.checkLeapYearAnimal(cat1);
-        } catch (InvalidAnimalBirthDateException ex) {
-            throw new InvalidAnimalException("Работа метода завершилась с ошибкой: " + ex.getMessage());
+        Map<String, List<Animal>> animalsMap = createAnimalService.createAnimals(100);
+
+        for (Map.Entry<String, List<Animal>> entry : animalsMap.entrySet()) {
+            Map<String, LocalDate> namesMap = animalsRepository.findLeapYearNames(entry.getValue());
+            System.out.println(namesMap);
         }
 
-        try {
-            searchService.checkLeapYearAnimal(cat2);
-        } catch (InvalidAnimalBirthDateException ex) {
-            throw new InvalidAnimalException("Работа метода завершилась с ошибкой: " + ex.getMessage());
+        System.out.println("———————————————————");
+
+        for (Map.Entry<String, List<Animal>> entry : animalsMap.entrySet()) {
+            Map<Animal, Integer> agesMap = animalsRepository.findOlderAnimal(entry.getValue(), 20);
+            System.out.println(agesMap);
         }
 
-        try {
-            searchService.checkLeapYearAnimal(null);
-        } catch (InvalidAnimalBirthDateException ex) {
-            throw InvalidAnimalException.emptyObject();
+        System.out.println("———————————————————");
+        for (Map.Entry<String, List<Animal>> entry : animalsMap.entrySet()) {
+            Map<String, Integer> duplicatesMap = animalsRepository.findDuplicate(entry.getValue());
+            System.out.println(duplicatesMap);
         }
+
     }
 }

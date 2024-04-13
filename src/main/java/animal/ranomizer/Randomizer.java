@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Randomizer implements IRandomizer {
     final String[] breedValues = {"Порода 1", "Порода 2", "Порода 3", "Порода 4", "Порода 5"};
-    final String[] nameValues = {"Имя 1", "Имя 2", "Имя 3", "Имя 4", "Имя 5"};
+    final String[] nameValues = {"Муся", "Патрик", "Мухтар", "Тучка", "Буся"};
     final Double[] costValues = {10.0, 100.0, 1000.0, 10000.0, 100000.0};
     final String[] characterValues = {"Добрый", "Злой", "Веселый", "Радостный", "Другой"};
 
