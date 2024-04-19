@@ -10,4 +10,7 @@ public interface AnimalRepository {
     Map<String, LocalDate> findLeapYearNames (List<Animal> animals);
     Map<Animal, Integer> findOlderAnimal (List<Animal> animals, Integer minAge);
     Map<String, Integer> findDuplicate (List<Animal> animals);
+    double findAverageAge (List<Animal> animals);
+    List<Animal> findOldAndExpensive (List<Animal> animals);
+    List<String> findMinConstAnimals (List<Animal> animals);
 }

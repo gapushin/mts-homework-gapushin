@@ -2,13 +2,11 @@ package animal.repository;
 
 import animal.Animal;
 import animal.exceptions.InvalidAnimalBirthDateException;
-import animal.exceptions.InvalidAnimalException;
 import animal.search.SearchService;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AnimalsRepositoryImpl implements  AnimalRepository {
 
@@ -20,15 +18,15 @@ public class AnimalsRepositoryImpl implements  AnimalRepository {
         public Map<String, LocalDate> findLeapYearNames(List<Animal> animals) {
         Map<String, LocalDate> map = new HashMap<>();
 
-        animals.forEach(animal -> {
-            try {
-                if (this.searchService.checkLeapYearAnimal(animal)) {
-                    map.put(String.format("%s %s ", animal.getClassName(), animal.getName()), animal.getBirthDate());
+        animals.stream()
+            .filter(animal -> {
+                try {
+                    return this.searchService.checkLeapYearAnimal(animal);
+                } catch (InvalidAnimalBirthDateException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (InvalidAnimalBirthDateException e) {
-                throw new InvalidAnimalException("Работа метода завершилась с ошибкой: " + e.getMessage());
-            }
-        });
+            })
+            .forEach(animal -> map.put(String.format("%s %s ", animal.getClassName(), animal.getName()), animal.getBirthDate()));
 
         return  map;
     }
@@ -37,11 +35,9 @@ public class AnimalsRepositoryImpl implements  AnimalRepository {
     public Map<Animal, Integer> findOlderAnimal(List<Animal> animals, Integer minAge) {
         Map<Animal, Integer> map = new HashMap<>();
 
-        animals.forEach(animal -> {
-            if (animal.getBirthDate().getYear() < LocalDate.now().getYear() - minAge) {
-                map.put(animal, animal.getBirthDate().getYear());
-            }
-        });
+        animals.stream()
+            .filter(animal -> animal.getBirthDate().getYear() < LocalDate.now().getYear() - minAge)
+            .forEach(animal -> map.put(animal, animal.getBirthDate().getYear()));
 
         return  map;
     }
@@ -53,5 +49,41 @@ public class AnimalsRepositoryImpl implements  AnimalRepository {
         animals.forEach(animal -> map.put(animal.getClassName(), map.getOrDefault(animal.getClassName(), 0) + 1));
 
         return  map;
+    }
+
+    @Override
+    public double findAverageAge(List<Animal> animals) {
+        return animals.stream()
+            .mapToInt(animal -> LocalDate.now().getYear() - animal.getBirthDate().getYear())
+            .summaryStatistics()
+            .getAverage();
+    }
+
+    @Override
+    public List<Animal> findOldAndExpensive(List<Animal> animals) {
+        Double averagePrice = animals.stream()
+            .mapToDouble(Animal::getCost)
+            .summaryStatistics()
+            .getAverage();
+
+        return animals.stream()
+            .filter(animal -> animal.getCost() > averagePrice && animal.getBirthDate().getYear() < LocalDate.now().getYear() - 5)
+            .sorted(Comparator.comparing(Animal::getBirthDate))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findMinConstAnimals(List<Animal> animals) {
+        List<String> result = new ArrayList<>();
+
+        animals
+           .stream()
+           .sorted(Comparator.comparing(Animal::getCost))
+           .limit(3)
+           .sorted(Comparator.comparing(Animal::getName).reversed())
+           .collect(Collectors.toList())
+           .forEach(animal -> result.add(animal.getName()));
+
+        return result;
     }
 }
