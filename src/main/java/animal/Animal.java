@@ -2,7 +2,8 @@ package animal;
 
 import java.time.LocalDate;
 
-public interface IAnimal {
+public interface Animal {
+    String getClassName();
     String getBreed();
     String getName();
     Double getCost();

@@ -1,12 +1,12 @@
 package animal.search;
 
-import animal.IAnimal;
+import animal.Animal;
 import animal.exceptions.InvalidAnimalBirthDateException;
 import animal.exceptions.InvalidAnimalException;
 
 public class SearchServiceImpl implements SearchService {
     @Override
-    public boolean checkLeapYearAnimal (IAnimal animal) throws InvalidAnimalException, InvalidAnimalBirthDateException {
+    public boolean checkLeapYearAnimal (Animal animal) throws InvalidAnimalException, InvalidAnimalBirthDateException {
         if (animal == null) {
            throw InvalidAnimalException.emptyObject();
         }
@@ -16,12 +16,11 @@ public class SearchServiceImpl implements SearchService {
         }
 
         final int year = animal.getBirthDate().getYear();
-        boolean isLeapYear = year > 1584 &&
-                ((year % 400 == 0) || (year %4 == 0 && year % 100 != 0));
-        System.out.println(isLeapYear ?
-                String.format("%s был рожден в високосный год", animal.getName()) :
-                String.format("%s не был рожден в високосный год", animal.getName()));
+        //        System.out.println(isLeapYear ?
+//                String.format("%s %s был рожден в високосный год", animal.getClassName(), animal.getName()) :
+//                String.format("%s %s не был рожден в високосный год", animal.getClassName(), animal.getName()));
 
-        return isLeapYear;
+        return year > 1584 &&
+                ((year % 400 == 0) || (year %4 == 0 && year % 100 != 0));
     }
 }

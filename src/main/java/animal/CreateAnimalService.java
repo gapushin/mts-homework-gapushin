@@ -1,3 +1,3 @@
 package animal;
 
-public class CreateAnimalService implements IAnimalService {}
+public class CreateAnimalService implements AnimalService {}
