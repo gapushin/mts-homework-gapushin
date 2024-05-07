@@ -1,6 +1,8 @@
 package multiThreading;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,9 +16,32 @@ public class Main {
         System.out.println(Arrays.toString(SimpleNumbers));
         System.out.println("————————————");
 
+        int threadsNum = 4;
+        int incrementsSteps = 1000;
+        List<Thread> threads = new ArrayList<>();
+        AtomicCounter atomicCounter = new AtomicCounter();
 
-        AtomicCounter atomicCounter = new AtomicCounter(4);
-        int count = atomicCounter.incrementWith(1000);
-        System.out.println(count);
+
+        for (int i = 0; i < threadsNum; i++) {
+            var thread = new Thread(() -> {
+                for (int j = 0; j < incrementsSteps / threadsNum; j++) {
+                    atomicCounter.increment();
+                }
+            });
+            threads.add(thread);
+            thread.start();
+        }
+
+        for (Thread thread: threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        int result = atomicCounter.getResult();
+
+        System.out.println(result);
     }
 }
