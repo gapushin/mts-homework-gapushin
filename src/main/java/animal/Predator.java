@@ -10,7 +10,7 @@ public class Predator extends AbstractAnimal {
     
     @Override
     public void printAnimalData () {
-        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost() + " Дата рождения: " + getBirthDate() + " Я злой и опасный!");
+        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost() + " Дата рождения: " + getBirthDate() +  " Секрет: " + getSecretInformation() + " Я злой и опасный!" + "\n");
     }
 
     public void makeRoar () {

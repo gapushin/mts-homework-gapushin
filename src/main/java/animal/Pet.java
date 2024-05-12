@@ -10,7 +10,7 @@ public class Pet extends AbstractAnimal {
 
     @Override
     public void printAnimalData () {
-        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost() + " Дата рождения: " + getBirthDate() + " А еще я домашний <3");
+        System.out.println("Порода: " + getBreed() + " Характер: " + getCharacter() + " Имя: "+ getName() + " Цена: " + getCost() + " Дата рождения: " + getBirthDate()  + " Секрет: " + getSecretInformation() + " А еще я домашний <3" + "\n");
     }
 
     public void makePetSound () {
