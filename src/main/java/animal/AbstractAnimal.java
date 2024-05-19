@@ -86,12 +86,8 @@ abstract public class AbstractAnimal implements Animal {
         try {
             List<String> allLines = Files.readAllLines(path);
             return allLines.get(new Random().nextInt(allLines.size() - 1));
-        } catch (IOException exception) {
-            try {
-                throw new IOException(exception);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
