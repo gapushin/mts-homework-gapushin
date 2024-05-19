@@ -1,0 +1,41 @@
+[
+  {
+    "birthDate": [
+      1988,
+      1,
+      1
+    ],
+    "breed": "Порода 3",
+    "character": "Характер 3",
+    "className": "Dog",
+    "cost": 20.0,
+    "name": "Имя 3",
+    "secretInformation": "0KHRg9C/0LXRgNGB0LXQutGA0LXRgg=="
+  },
+  {
+    "birthDate": [
+      1988,
+      1,
+      1
+    ],
+    "breed": "Порода 3",
+    "character": "Характер 3",
+    "className": "Dog",
+    "cost": 30.0,
+    "name": "Имя 3",
+    "secretInformation": "0KLQsNC50L3QsNGP0LjQvdGE0L7RgNC80LDRhtC40Y8="
+  },
+  {
+    "birthDate": [
+      1993,
+      1,
+      1
+    ],
+    "breed": "Порода 5",
+    "character": "Характер 5",
+    "className": "Dog",
+    "cost": 30.0,
+    "name": "Имя 5",
+    "secretInformation": "0KPRgtGA0L7QvNC90LDRgNCw0YHRgdCy0LXRgtC1"
+  }
+]

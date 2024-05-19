@@ -4,15 +4,32 @@ import animal.Animal;
 import animal.exceptions.InvalidAnimalBirthDateException;
 import animal.search.SearchService;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class AnimalsRepositoryImpl implements  AnimalRepository {
 
     private final SearchService searchService;
     public AnimalsRepositoryImpl (SearchService searchService) {
         this.searchService = searchService;
+    }
+
+    private void writeToFile(Map<Animal, Integer> animals) {
+        File file = new File("resources/results/findOlderAnimals.json");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+
+        try {
+            objectMapper.writeValue(file, animals.keySet());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
     @Override
         public Map<String, LocalDate> findLeapYearNames(List<Animal> animals) {
@@ -39,6 +56,7 @@ public class AnimalsRepositoryImpl implements  AnimalRepository {
             .filter(animal -> animal.getBirthDate().getYear() < LocalDate.now().getYear() - minAge)
             .forEach(animal -> map.put(animal, animal.getBirthDate().getYear()));
 
+        writeToFile(map);
         return  map;
     }
 
